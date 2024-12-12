@@ -54,11 +54,7 @@ async function createBarcode(productId) {
 }
 
 app.post('/product', async function (req, res) {
-
-    console.log(req.body.productId.length);
-
     createBarcode(req.body.productId).then(png => {
-
         const dout = fs.createWriteStream(OUTPUT_PATH + req.body.productId + '-code128.png'),
             dstream = new PNGStream.from(png);
 
