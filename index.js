@@ -20,7 +20,7 @@ app.post('/order', async function (req, res) {
         barcolor: '#000',
 
     }).then(png => {
-        const dout = fs.createWriteStream('/workspace/storage/app/public/' + req.body.orderId + '-order.png'),
+        const dout = fs.createWriteStream('/var/www/html/storage/app/public/' + req.body.orderId + '-order.png'),
             dstream = new PNGStream.from(png);
         dstream.pipe(dout);
 
@@ -39,7 +39,7 @@ const BARCODE_CONFIG = {
     textcolor: 'ff0000',        // Red text
 };
 
-const OUTPUT_PATH = '/workspace/storage/app/public/';
+const OUTPUT_PATH = '/var/www/html/storage/app/public/';
 
 const SUCCESS_RESPONSE = {
     status: true,
@@ -103,7 +103,7 @@ app.post('/voucher', async function (req, res) {
                 ctx.drawImage(img, 536,728, 247, 247)
             })
 
-            const out = fs.createWriteStream('/workspace/storage/app/public/' + id + '-code.png'),
+            const out = fs.createWriteStream('/var/www/html/storage/app/public/' + id + '-code.png'),
                 stream = canvas.createPNGStream();
             stream.pipe(out);
         }, 3000)
@@ -115,7 +115,7 @@ app.post('/voucher', async function (req, res) {
     res.status(200).json({
         'status': true,
         'message': 'The was was created.',
-        'path': '/workspace/storage/app/public' + id + '-code.png'
+        'path': '/var/www/html/storage/app/public' + id + '-code.png'
     }).end()
 });
 
